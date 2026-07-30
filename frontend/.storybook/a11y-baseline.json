@@ -1545,6 +1545,9 @@
   "editor/src/core/ui/SettingsRow.stories.tsx :: Toggle": ["label"],
   "editor/src/core/ui/SettingsRow.stories.tsx :: With Description": ["label"],
   "editor/src/core/ui/SettingsShell.stories.tsx :: Default": ["color-contrast"],
+  "editor/src/core/ui/StatBar.stories.tsx :: With Attention Fact": [
+    "color-contrast"
+  ],
   "editor/src/core/ui/StatTile.stories.tsx :: Tone Row": ["color-contrast"],
   "editor/src/core/ui/StatusBadge.stories.tsx :: All Tones": ["color-contrast"],
   "editor/src/core/ui/StatusBadge.stories.tsx :: Default": ["color-contrast"],
@@ -1564,6 +1567,10 @@
   ],
   "editor/src/core/ui/Table.stories.tsx :: Basic": ["color-contrast"],
   "editor/src/core/ui/Table.stories.tsx :: Interactive": ["color-contrast"],
+  "editor/src/core/ui/TableToolbar.stories.tsx :: Attached To Table": [
+    "color-contrast"
+  ],
+  "editor/src/core/ui/TableToolbar.stories.tsx :: Default": ["color-contrast"],
   "editor/src/core/ui/Tabs.stories.tsx :: In Context Document Verticals": [
     "color-contrast"
   ],
