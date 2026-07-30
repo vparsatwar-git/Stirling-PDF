@@ -15,25 +15,18 @@ import App from "@app/App";
 import "@app/i18n"; // Initialize i18next
 import { BASE_PATH } from "@app/constants/app";
 import { applyDevWorktreeLabel } from "@app/utils/applyDevWorktreeLabel";
-
 import { startEagerWasmCompilation } from "@app/services/wasmPrecompiler";
 
 applyDevWorktreeLabel();
-
+startEagerWasmCompilation();
 if (typeof window !== "undefined") {
-  const scheduleCompilation = () => {
-    if (typeof requestIdleCallback === "function") {
-      requestIdleCallback(() => startEagerWasmCompilation(), { timeout: 2000 });
-    } else {
-      setTimeout(startEagerWasmCompilation, 1000);
-    }
-  };
-
-  if (document.readyState === "complete") {
-    scheduleCompilation();
-  } else {
-    window.addEventListener("load", scheduleCompilation);
-  }
+  const originalDPR = window.devicePixelRatio;
+  Object.defineProperty(window, "devicePixelRatio", {
+    get() {
+      return Math.min(originalDPR || 1, 1.5);
+    },
+    configurable: true,
+  });
 }
 
 const container = document.getElementById("root");
