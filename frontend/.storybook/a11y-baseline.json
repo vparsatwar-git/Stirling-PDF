@@ -2298,7 +2298,7 @@
   "editor/src/portal/views/Integrations.stories.tsx :: No Connections": [
     "color-contrast"
   ],
-  "editor/src/portal/views/PipelineBuilder.stories.tsx :: Default": [
+  "editor/src/portal/views/PipelineBuilder.stories.tsx :: New": [
     "color-contrast"
   ],
   "editor/src/portal/views/Pipelines.stories.tsx :: Default": [
