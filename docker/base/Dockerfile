@@ -352,7 +352,8 @@ RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
     python3 -m venv /opt/venv --system-site-packages && \
     /opt/venv/bin/pip install --no-cache-dir --prefer-binary --only-binary=:all: \
       weasyprint pdf2image opencv-python-headless ocrmypdf \
-      cryptography \
+      "cryptography>=48.0.1" \
+      "lxml>=6.1.0" \
       "unoserver==${UNOSERVER_VERSION}" && \
     find /opt/venv -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true && \
     find /opt/venv \( -name '*.pyc' -o -name '*.pyi' \) -delete 2>/dev/null || true && \
@@ -364,7 +365,7 @@ RUN --mount=type=cache,target=/root/.cache/pip,sharing=locked \
 
 
 # Final runtime image - the actual base image
-FROM eclipse-temurin:25-jre-noble@sha256:b27ca47660a8fa837e47a8533b9b1a3a430295cf29ca28d91af4fd121572dc29 AS runtime
+FROM eclipse-temurin:25-jre-noble@sha256:f9bd8815e73632c22985ebb133ec49b9fc4ad5ffe0657594ac02748ad0431ab7 AS runtime
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -382,6 +383,9 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get install -y --no-install-recommends software-properties-common; \
     add-apt-repository -y ppa:libreoffice/ppa; \
     apt-get update; \
+    # Security: upgrade base-image packages to latest noble patches (reduces deb CVEs
+    # in openssl, perl, libxml2, gnutls, cups, curl, etc. inherited from the runtime base)
+    apt-get upgrade -y; \
     apt-get install -y --no-install-recommends \
       # Core tools
       ca-certificates tzdata tini bash fontconfig curl \
